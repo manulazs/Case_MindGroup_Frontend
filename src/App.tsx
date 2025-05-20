@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { Header } from './Header';
+import articleImage from './assets/programacao-scaled.jpg';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <main className="container">
+        <section className="main-article">
+          <img src={articleImage} alt="JavaScript destaque" />
+          <h1>Desvendando o JavaScript: Dicas e Técnicas Essenciais para Desenvolvedores</h1>
+          <p className="author">Por John Doe – Março 20, 2025</p>
+          <button className="read-more">LER MAIS</button>
+        </section>
+
+        <aside className="sidebar">
+          <h2>New</h2>
+          <ul>
+            <li><strong>IA:</strong> O Futuro da Automação e da Transformação Digital</li>
+            <li><strong>Computação Quântica:</strong> O Próximo Grande Salto</li>
+            <li><strong>IoT:</strong> Como a Internet das Coisas Está Moldando as Cidades</li>
+            <li><strong>RA/RV:</strong> O Impacto no Setor Educacional</li>
+          </ul>
+        </aside>
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
