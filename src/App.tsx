@@ -17,10 +17,18 @@ function App() {
         <aside className="sidebar">
           <h2>New</h2>
           <ul>
-            <li><strong>IA:</strong> O Futuro da Automação e da Transformação Digital</li>
-            <li><strong>Computação Quântica:</strong> O Próximo Grande Salto</li>
-            <li><strong>IoT:</strong> Como a Internet das Coisas Está Moldando as Cidades</li>
-            <li><strong>RA/RV:</strong> O Impacto no Setor Educacional</li>
+            <li><strong>IA:</strong> O Futuro da Automação e da Transformação Digital
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, assumenda?</p>
+            </li>
+            <li><strong>Computação Quântica:</strong> O Próximo Grande Salto
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, assumenda?</p>
+            </li>
+            <li><strong>IoT:</strong> Como a Internet das Coisas Está Moldando as Cidades
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, assumenda?</p>
+            </li>
+            <li><strong>RA/RV:</strong> O Impacto no Setor Educacional
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, assumenda?</p>
+            </li>
           </ul>
         </aside>
       </main>
