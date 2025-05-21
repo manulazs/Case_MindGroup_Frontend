@@ -18,7 +18,7 @@ export function Login() {
           <label htmlFor="password">Senha</label>
           <input type="password" id="password" placeholder="****" />
 
-          <a href="#" className="forgot-password">Esqueceu a senha?</a>
+          <Link to="/newPass" className="forgot-password">Esqueci minha senha</Link>
 
           <button type="submit" className="login-button">Entrar</button>
 

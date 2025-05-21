@@ -1,6 +1,6 @@
 import './newPass.css';
 
-export function NewPass() {
+export function Newpass() {
   return (
     <div className="newPass-container">
       <div className="newPass-left">
