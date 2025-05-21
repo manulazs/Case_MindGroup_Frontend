@@ -3,10 +3,11 @@ import { Header } from './Header';
 import { Home } from './Home';
 import { Login } from './Login';
 import { Register } from './Register';
+import { newPass } from './newPass';
 
 function AppRoutes() {
   const location = useLocation();
-  const hideHeaderOn = ['/login', '/Register']; // Oculta o header nessas páginas
+  const hideHeaderOn = ['/login', '/Register', './newPass']; // Oculta o header nessas páginas
 
   return (
     <>
@@ -15,6 +16,7 @@ function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/newPass" element={<newPass />} />
       </Routes>
     </>
   );
