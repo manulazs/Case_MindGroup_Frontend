@@ -5,7 +5,7 @@ import { Login } from './Login';
 import { Register } from './Register';
 import { Newpass } from './newPass';
 import { Publicar } from './publicar';
-import { Artigos } from './Artigos';
+import { Artigo } from './Artigos';
 import { Perfil } from './Perfil';
 import './App.css';
 
@@ -24,9 +24,9 @@ function AppContent() {
         <Route path="/register" element={<Register />} />
         <Route path="/newPass" element={<Newpass />} />
         <Route path="/publicar" element={<Publicar />} />
-        <Route path="/artigos" element={<Artigos />} />
+        <Route path="/artigos" element={<Artigo />} />
         <Route path="/perfil" element={<Perfil />} />
-        <Route path="/artigo/:id" element={<Artigos />} />
+        <Route path="/artigo/:id" element={<Artigo />} />
       </Routes>
     </>
   );
