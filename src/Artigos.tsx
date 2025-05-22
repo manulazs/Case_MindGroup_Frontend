@@ -1,40 +1,39 @@
-import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import './Artigo.css';
+import './Artigos.css';
+import { Link } from 'react-router-dom';
 
-export function Artigo() {
-  const { id } = useParams();
-  const [article, setArticle] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
+export function Artigos() {
+  const [articles, setArticles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/articles/${id}`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Artigo não encontrado');
-        }
-        return res.json();
-      })
+    fetch('http://localhost:3000/articles')
+      .then(res => res.json())
       .then(data => {
-        setArticle(data);
+        setArticles(data);
         setLoading(false);
       })
       .catch(err => {
-        setError(err.message);
+        console.error('Erro ao carregar artigos:', err);
         setLoading(false);
       });
-  }, [id]);
+  }, []);
 
-  if (loading) return <p>Carregando...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p>Carregando artigos...</p>;
 
   return (
-    <div className="artigo-container">
-      <h1>{article.title}</h1>
-      {article.image && <img src={article.image} alt={article.title} />}
-      <p>{article.text}</p>
-      <p>Likes: {article.likes}</p>
+    <div className="artigos-container">
+      <h1>Artigos</h1>
+      <div className="artigos-list">
+        {articles.map(article => (
+          <div key={article.id} className="artigo-card">
+            <h2>{article.title}</h2>
+            {article.image && <img src={article.image} alt={article.title} />}
+            <p>{article.text.substring(0, 100)}...</p>
+            <Link to={`/artigo/${article.id}`}>Ler mais</Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
