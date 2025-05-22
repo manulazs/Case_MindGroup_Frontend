@@ -1,31 +1,45 @@
 import './Register.css';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export function Register() {
-  return (
-    <div className="register-container">
-      <div className="register-left">
-        <h1 className="logo">M.</h1>
-        <p>Inovação ao Seu Alcance.</p>
-      </div>
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
 
-      <div className="register-right">
-        <h2 className='register-text'>Registrar</h2>
-        <form className="register-form">
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" placeholder="email@email.com" />
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.id]: e.target.value });
+  };
 
-          <label htmlFor="password">Senha</label>
-          <input type="password" id="password" placeholder="****" />
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-          <label htmlFor="confirm-password">Confirmar Senha</label>
-          <input type="password" id="confirm-password" placeholder="****" />
+    if (form.password !== form.confirmPassword) {
+      alert('As senhas não coincidem!');
+      return;
+    }
 
-          <button type="submit" className="register-button">Registrar</button>
-          
-          <Link to="/login" className="login-link">Já possui uma conta? Clique aqui</Link>
-        </form>
-      </div>
-    </div>
-  );
+    // Montar o objeto que será enviado
+    const data = {
+      name: "NomeFicticio",   // Pode criar campos no formulário se quiser coletar.
+      surname: "SobrenomeFicticio",
+      email: form.email,
+      password: form.password
+    };
+
+    fetch('http://localhost:3000/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+      })
+      .catch(err => {
+        console.error('Erro:', err);
+      });
+  };
 }
