@@ -15,7 +15,7 @@ export function Header() {
         {user && <Link to="/publicar">Publicar</Link>}
         {user ? (
           <div className="user-menu">
-            <img src="/default-avatar.png" alt="avatar" className="avatar" />
+            <img src={user?.avatar || '/default-avatar.png'} alt="avatar" className="avatar" />
             <div className="dropdown">
               <Link to="/perfil">Perfil</Link>
               <button onClick={() => {
