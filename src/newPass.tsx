@@ -1,6 +1,47 @@
 import './newPass.css';
+import { useState } from 'react';
 
 export function Newpass() {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (form.password !== form.confirmPassword) {
+      alert('As senhas não coincidem!');
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+
+    fetch('http://localhost:3000/auth/newpass', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        newPassword: form.password,
+        email: form.email // opcional, depende do backend validar.
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+      })
+      .catch(err => {
+        console.error('Erro:', err);
+      });
+  };
+
   return (
     <div className="newPass-container">
       <div className="newPass-left">
@@ -10,19 +51,17 @@ export function Newpass() {
 
       <div className="newPass-right">
         <h2 className='newPass-text'>Nova Senha</h2>
-        <form className="newPass-form">
+        <form className="newPass-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" placeholder="email@email.com" />
+          <input type="email" id="email" placeholder="email@email.com" onChange={handleChange} />
 
           <label htmlFor="password">Nova Senha</label>
-          <input type="password" id="password" placeholder="****" />
+          <input type="password" id="password" placeholder="****" onChange={handleChange} />
 
-          <label htmlFor="confirm-password">Confirmar Nova Senha</label>
-          <input type="password" id="confirm-password" placeholder="****" />
+          <label htmlFor="confirmPassword">Confirmar Nova Senha</label>
+          <input type="password" id="confirmPassword" placeholder="****" onChange={handleChange} />
 
           <button type="submit" className="newPass-button">Salvar</button>
-
-         
         </form>
       </div>
     </div>
