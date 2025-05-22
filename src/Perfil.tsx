@@ -2,7 +2,13 @@ import { useState, useEffect, useRef } from 'react';
 import './Perfil.css';
 
 export function Perfil() {
-  const [form, setForm] = useState({ name: '', surname: '', email: '', avatar: '/default-avatar.png' });
+  const [form, setForm] = useState({
+    name: '',
+    surname: '',
+    email: '',
+    avatar: '/default-avatar.png'
+  });
+
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -50,7 +56,7 @@ export function Perfil() {
   return (
     <div className="perfil-container">
       <div className="perfil-avatar" onClick={() => setMenuOpen(!menuOpen)}>
-        <img src={form.avatar} alt="avatar" />
+        <img src={form.avatar || '/default-avatar.png'} alt="avatar" />
         {menuOpen && (
           <div className="perfil-menu" ref={menuRef}>
             <button onClick={() => alert('Alterar Perfil')}>Alterar Perfil</button>
