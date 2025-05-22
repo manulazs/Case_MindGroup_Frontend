@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import './Artigo.css';
 
 export function Artigo() {
   const { id } = useParams();
@@ -29,7 +30,7 @@ export function Artigo() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
+    <div className="artigo-container">
       <h1>{article.title}</h1>
       {article.image && <img src={article.image} alt={article.title} />}
       <p>{article.text}</p>

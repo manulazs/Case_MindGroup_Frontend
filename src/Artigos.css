@@ -1,0 +1,29 @@
+.artigos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  width: 175%;
+  padding: 20px;
+}
+
+.artigos-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.artigo-card {
+  width: 300px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.artigo-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
