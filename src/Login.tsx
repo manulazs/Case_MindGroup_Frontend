@@ -25,6 +25,7 @@ export function Login() {
         if (data.token) {
           localStorage.setItem('token', data.token);
           alert('Login realizado com sucesso!');
+          window.location.href = '/';
         } else {
           alert(data.message);
         }
