@@ -11,6 +11,7 @@ export function Perfil() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState<string | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -39,7 +40,11 @@ export function Perfil() {
       body: JSON.stringify(form)
     })
     .then(res => res.json())
-    .then(data => alert(data.message));
+    .then(data => {
+      setForm(data.user);
+      setStatus(data.message);
+      setTimeout(() => setStatus(null), 3000);
+    });
   };
 
   const handleClickOutside = (e: MouseEvent) => {
@@ -82,6 +87,7 @@ export function Perfil() {
         <input name="avatar" value={form.avatar} onChange={handleChange} />
 
         <button type="submit">Atualizar</button>
+        {status && <p className="perfil-status">{status}</p>}
       </form>
     </div>
   );
