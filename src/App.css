@@ -52,3 +52,31 @@
   font-size: 14px;
 }
 
+.top-articles {
+  margin-top: 40px;
+}
+
+.articles-list {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.article-card {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+}
+
+.article-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}

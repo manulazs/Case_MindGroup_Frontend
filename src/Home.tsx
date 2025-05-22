@@ -32,16 +32,16 @@ export function Home() {
         <h2>New</h2>
         <ul>
           <li><strong>IA:</strong> O Futuro da Automação e da Transformação Digital
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, assumenda?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           </li>
           <li><strong>Computação Quântica:</strong> O Próximo Grande Salto
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, assumenda?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           </li>
           <li><strong>IoT:</strong> Como a Internet das Coisas Está Moldando as Cidades
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, assumenda?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           </li>
           <li><strong>RA/RV:</strong> O Impacto no Setor Educacional
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, assumenda?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           </li>
         </ul>
       </aside>
@@ -49,9 +49,10 @@ export function Home() {
       <section className="top-articles">
         <h2>Artigos Mais Curtidos</h2>
         <div className="articles-list">
-          {topArticles.map((article: any) => (
+          {topArticles.map((article: any, index: number) => (
             <div key={article.id} className="article-card">
-              <h3>{article.title}</h3>
+              <h3>{String(index + 1).padStart(2, '0')}</h3>
+              <h4>{article.title}</h4>
               {article.image && <img src={article.image} alt={article.title} />}
               <p>{article.text.substring(0, 100)}...</p>
               <p>Likes: {article.likes}</p>
@@ -62,5 +63,5 @@ export function Home() {
     </main>
   );
 }
-// // o codigo acima é um componente React que exibe uma lista de artigos. Ele utiliza o hook useState para armazenar os artigos e o hook useEffect para buscar os dados da API assim que o componente é montado. Cada artigo possui um título, imagem, texto e número de curtidas. Se o usuário estiver autenticado (token presente), ele pode curtir os artigos, o que atualiza o número de curtidas na interface. O código também lida com a atualização do estado dos artigos após uma curtida, garantindo que a interface reflita as mudanças em tempo real.
-// // O componente utiliza a função fetch para fazer requisições à API, e o método PATCH para atualizar o número de curtidas de um artigo específico. A lista de artigos é renderizada em um loop, exibindo as informações de cada artigo e um botão de curtir, se o usuário estiver autenticado. O botão de curtir chama a função handleLike, que faz a requisição para atualizar o número de curtidas e atualiza o estado local dos artigos.
+// O código acima é um componente React que representa a página inicial de um site. Ele exibe um artigo em destaque, uma lista de artigos mais curtidos e uma barra lateral com notícias recentes. O componente utiliza o hook useState para armazenar os artigos mais curtidos e o hook useEffect para buscar os dados da API assim que o componente é montado. A lista de artigos é filtrada, ordenada e limitada a quatro itens antes de ser exibida. O layout é estilizado com classes CSS, e as imagens são carregadas a partir de um arquivo local.
+// O componente também inclui um botão "LER MAIS" que pode ser usado para redirecionar o usuário para a página do artigo em destaque. A barra lateral contém uma lista de notícias recentes, cada uma com um título e uma breve descrição. O código é um exemplo de como estruturar uma página inicial com artigos e notícias, utilizando React para gerenciar o estado e renderizar os dados dinamicamente.

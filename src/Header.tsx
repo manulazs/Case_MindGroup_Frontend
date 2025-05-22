@@ -31,3 +31,5 @@ export function Header() {
     </header>
   );
 }
+// o codigo acima é um componente de cabeçalho (Header) para um aplicativo React. Ele exibe o logotipo do aplicativo e um menu de navegação com links para diferentes páginas, como "Home", "Artigos", "Registrar" e "Publicar". O cabeçalho também lida com a autenticação do usuário, exibindo opções diferentes dependendo se o usuário está logado ou não. Se o usuário estiver logado, ele verá um menu suspenso com opções para acessar o perfil e desconectar-se. Caso contrário, verá um link para entrar no aplicativo. O componente utiliza o hook useAuth para verificar o estado de autenticação do usuário e renderiza o menu apropriado com base nessa informação.
+//
