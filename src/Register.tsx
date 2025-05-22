@@ -23,8 +23,8 @@ export function Register() {
 
     // Montar o objeto que será enviado
     const data = {
-      name: "NomeFicticio",   // Pode criar campos no formulário se quiser coletar.
-      surname: "SobrenomeFicticio",
+      name: "Nome",   
+      surname: "Sobrenome",
       email: form.email,
       password: form.password
     };
