@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import './Perfil.css';
 
 export function Perfil() {
-  const [form, setForm] = useState({ name: '', surname: '', email: '' });
+  const [form, setForm] = useState({ name: '', surname: '', email: '', avatar: '/default-avatar.png' });
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -33,17 +36,47 @@ export function Perfil() {
     .then(data => alert(data.message));
   };
 
+  const handleClickOutside = (e: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+      setMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Nome</label>
-      <input name="name" value={form.name} onChange={handleChange} />
-      <label>Sobrenome</label>
-      <input name="surname" value={form.surname} onChange={handleChange} />
-      <label>Email</label>
-      <input name="email" value={form.email} onChange={handleChange} />
-      <button type="submit">Atualizar</button>
-    </form>
+    <div className="perfil-container">
+      <div className="perfil-avatar" onClick={() => setMenuOpen(!menuOpen)}>
+        <img src={form.avatar} alt="avatar" />
+        {menuOpen && (
+          <div className="perfil-menu" ref={menuRef}>
+            <button onClick={() => alert('Alterar Perfil')}>Alterar Perfil</button>
+            <button onClick={() => {
+              localStorage.removeItem('token');
+              window.location.href = '/';
+            }}>Sair</button>
+          </div>
+        )}
+      </div>
+
+      <form onSubmit={handleSubmit} className="perfil-form">
+        <label>Nome</label>
+        <input name="name" value={form.name} onChange={handleChange} />
+
+        <label>Sobrenome</label>
+        <input name="surname" value={form.surname} onChange={handleChange} />
+
+        <label>Email</label>
+        <input name="email" value={form.email} onChange={handleChange} />
+
+        <label>Avatar (URL)</label>
+        <input name="avatar" value={form.avatar} onChange={handleChange} />
+
+        <button type="submit">Atualizar</button>
+      </form>
+    </div>
   );
 }
-// o código acima é um componente React que exibe e permite a edição do perfil do usuário. Ele utiliza o hook useState para armazenar os dados do formulário e o useEffect para buscar os dados do perfil assim que o componente é montado. O token de autenticação é enviado no cabeçalho da requisição. O componente renderiza um formulário com campos para nome, sobrenome e email, e ao enviar o formulário, ele faz uma requisição PUT para atualizar os dados do perfil no servidor.
-// O componente também exibe mensagens de sucesso ou erro com base na resposta do servidor. O código é um exemplo básico de como gerenciar o estado e as requisições em um aplicativo React, utilizando hooks para lidar com o ciclo de vida do componente e a manipulação de eventos.

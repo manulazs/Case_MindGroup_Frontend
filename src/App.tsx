@@ -9,6 +9,7 @@ import { Artigo } from './Artigos';
 import { Perfil } from './Perfil';
 import './App.css';
 
+
 function AppContent() {
   const location = useLocation();
 
