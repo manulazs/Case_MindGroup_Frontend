@@ -30,7 +30,7 @@ export function Newpass() {
       },
       body: JSON.stringify({
         newPassword: form.password,
-        email: form.email // opcional, depende do backend validar.
+        email: form.email
       })
     })
       .then(res => res.json())
@@ -67,3 +67,6 @@ export function Newpass() {
     </div>
   );
 }
+
+// o codigo acima é um componente React que renderiza um formulário para redefinir a senha do usuário. O formulário coleta o email, a nova senha e a confirmação da nova senha. Quando o formulário é enviado, ele verifica se as senhas coincidem e, em seguida, faz uma solicitação POST para o servidor com os dados do formulário. Se a solicitação for bem-sucedida, exibe uma mensagem de sucesso; caso contrário, exibe um erro no console.
+// O componente utiliza o hook useState do React para gerenciar o estado do formulário e o hook useEffect para lidar com efeitos colaterais, como a verificação de autenticação do usuário. Além disso, o componente faz uso de classes CSS para estilizar os elementos e garantir uma boa experiência do usuário.
