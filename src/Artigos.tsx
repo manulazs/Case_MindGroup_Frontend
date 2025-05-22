@@ -4,14 +4,29 @@ import { useState, useEffect } from 'react';
 export function Artigo() {
   const { id } = useParams();
   const [article, setArticle] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`http://localhost:3000/articles/${id}`)
-      .then(res => res.json())
-      .then(data => setArticle(data));
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Artigo não encontrado');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setArticle(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, [id]);
 
-  if (!article) return <p>Carregando...</p>;
+  if (loading) return <p>Carregando...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div>
