@@ -31,11 +31,13 @@ nav {
   position: absolute;
   right: 0;
   top: 40px;
-  background-color: #fff;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 5px;
-  display: none;
+  padding: 10px;
+  display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .user-menu:hover .dropdown {
