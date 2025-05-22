@@ -30,7 +30,7 @@ export function Header() {
         {user ? (
           <div className="user-menu" ref={menuRef}>
             <img 
-              src={(user.avatar) ? user.avatar : '/default-avatar.png'} 
+              src={user.avatar ? user.avatar : '/default-avatar.png'} 
               alt="avatar" 
               className="avatar"
               onClick={() => setMenuOpen(!menuOpen)}
