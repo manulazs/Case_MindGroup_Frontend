@@ -15,6 +15,26 @@ export function Artigos() {
     if (token) setUser(JSON.parse(atob(token.split('.')[1])));
   }, []);
 
+  const handleLikeToggle = (article: any) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Você precisa estar logado para curtir!');
+      return;
+    }
+
+    fetch(`http://localhost:3000/articles/${article.id}/like-toggle`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        setArticles(articles.map(a =>
+          a.id === article.id ? { ...a, likes: data.liked ? a.likes + 1 : a.likes - 1 } : a
+        ));
+      });
+  };
+
   const handleEdit = (articleId: number) => {
     window.location.href = `/editar/${articleId}`;
   };
@@ -29,6 +49,9 @@ export function Artigos() {
             {article.image && <img src={article.image} alt={article.title} />}
             <p>{article.text.substring(0, 100)}...</p>
             <p>Likes: {article.likes}</p>
+            {user && (
+              <button onClick={() => handleLikeToggle(article)}>Curtir/Descurtir</button>
+            )}
             {user?.id === article.user_id && (
               <button onClick={() => handleEdit(article.id)}>Editar</button>
             )}
