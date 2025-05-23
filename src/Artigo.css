@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding: 40px;
-  width: 195vh;
+  width: 200vh;
   margin: 0 auto;
 }
 
@@ -11,4 +11,14 @@
   max-width: 100%;
   border-radius: 8px;
   margin: 20px 0;
+}
+
+.artigo-container button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
