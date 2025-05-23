@@ -8,6 +8,8 @@ export function Newpass() {
     confirmPassword: ''
   });
 
+  const [message, setMessage] = useState<string | null>(null);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.id]: e.target.value });
   };
@@ -22,6 +24,11 @@ export function Newpass() {
 
     const token = localStorage.getItem('token');
 
+    if (!token) {
+      alert('Você precisa estar logado para alterar a senha!');
+      return;
+    }
+
     fetch('http://localhost:3000/auth/newpass', {
       method: 'POST',
       headers: {
@@ -35,10 +42,18 @@ export function Newpass() {
     })
       .then(res => res.json())
       .then(data => {
-        alert(data.message);
+        setMessage(data.message);
+        if (data.message.includes('sucesso')) {
+          setForm({
+            email: '',
+            password: '',
+            confirmPassword: ''
+          });
+        }
       })
       .catch(err => {
         console.error('Erro:', err);
+        setMessage('Erro ao atualizar a senha.');
       });
   };
 
@@ -53,20 +68,36 @@ export function Newpass() {
         <h2 className='newPass-text'>Nova Senha</h2>
         <form className="newPass-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" placeholder="email@email.com" onChange={handleChange} />
+          <input
+            type="email"
+            id="email"
+            placeholder="email@email.com"
+            onChange={handleChange}
+            value={form.email}
+          />
 
           <label htmlFor="password">Nova Senha</label>
-          <input type="password" id="password" placeholder="****" onChange={handleChange} />
+          <input
+            type="password"
+            id="password"
+            placeholder="****"
+            onChange={handleChange}
+            value={form.password}
+          />
 
           <label htmlFor="confirmPassword">Confirmar Nova Senha</label>
-          <input type="password" id="confirmPassword" placeholder="****" onChange={handleChange} />
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="****"
+            onChange={handleChange}
+            value={form.confirmPassword}
+          />
 
           <button type="submit" className="newPass-button">Salvar</button>
         </form>
+        {message && <p>{message}</p>}
       </div>
     </div>
   );
 }
-
-// o codigo acima é um componente React que renderiza um formulário para redefinir a senha do usuário. O formulário coleta o email, a nova senha e a confirmação da nova senha. Quando o formulário é enviado, ele verifica se as senhas coincidem e, em seguida, faz uma solicitação POST para o servidor com os dados do formulário. Se a solicitação for bem-sucedida, exibe uma mensagem de sucesso; caso contrário, exibe um erro no console.
-// O componente utiliza o hook useState do React para gerenciar o estado do formulário e o hook useEffect para lidar com efeitos colaterais, como a verificação de autenticação do usuário. Além disso, o componente faz uso de classes CSS para estilizar os elementos e garantir uma boa experiência do usuário.
