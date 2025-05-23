@@ -7,12 +7,11 @@ import { Newpass } from './newPass';
 import { Publicar } from './publicar';
 import { Artigos } from './Artigos';
 import { Perfil } from './Perfil';
+import { Artigo } from './Artigo';
 import './App.css';
-
 
 function AppContent() {
   const location = useLocation();
-
   const hideHeaderRoutes = ['/login', '/register', '/newPass'];
   const hideHeader = hideHeaderRoutes.includes(location.pathname);
 
@@ -27,7 +26,7 @@ function AppContent() {
         <Route path="/publicar" element={<Publicar />} />
         <Route path="/artigos" element={<Artigos />} />
         <Route path="/perfil" element={<Perfil />} />
-        <Route path="/artigo/:id" element={<Artigos />} />
+        <Route path="/artigo/:id" element={<Artigo />} />
       </Routes>
     </>
   );
