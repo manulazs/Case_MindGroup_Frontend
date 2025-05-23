@@ -18,23 +18,13 @@ export function Newpass() {
     e.preventDefault();
 
     if (form.password !== form.confirmPassword) {
-      alert('As senhas não coincidem!');
-      return;
-    }
-
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-      alert('Você precisa estar logado para alterar a senha!');
+      setMessage('As senhas não coincidem!');
       return;
     }
 
     fetch('http://localhost:3000/auth/newpass', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         newPassword: form.password,
         email: form.email
@@ -44,11 +34,7 @@ export function Newpass() {
       .then(data => {
         setMessage(data.message);
         if (data.message.includes('sucesso')) {
-          setForm({
-            email: '',
-            password: '',
-            confirmPassword: ''
-          });
+          setForm({ email: '', password: '', confirmPassword: '' });
         }
       })
       .catch(err => {
@@ -68,31 +54,13 @@ export function Newpass() {
         <h2 className='newPass-text'>Nova Senha</h2>
         <form className="newPass-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="email@email.com"
-            onChange={handleChange}
-            value={form.email}
-          />
+          <input type="email" id="email" onChange={handleChange} value={form.email} />
 
           <label htmlFor="password">Nova Senha</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="****"
-            onChange={handleChange}
-            value={form.password}
-          />
+          <input type="password" id="password" onChange={handleChange} value={form.password} />
 
           <label htmlFor="confirmPassword">Confirmar Nova Senha</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            placeholder="****"
-            onChange={handleChange}
-            value={form.confirmPassword}
-          />
+          <input type="password" id="confirmPassword" onChange={handleChange} value={form.confirmPassword} />
 
           <button type="submit" className="newPass-button">Salvar</button>
         </form>

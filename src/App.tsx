@@ -8,6 +8,7 @@ import { Publicar } from './publicar';
 import { Artigos } from './Artigos';
 import { Perfil } from './Perfil';
 import { Artigo } from './Artigo';
+import { EditarArtigo } from './editarArtigo';
 import './App.css';
 
 function AppContent() {
@@ -27,6 +28,7 @@ function AppContent() {
         <Route path="/artigos" element={<Artigos />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/artigo/:id" element={<Artigo />} />
+        <Route path="/editar/:id" element={<EditarArtigo />} />
       </Routes>
     </>
   );
