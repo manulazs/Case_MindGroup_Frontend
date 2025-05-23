@@ -2,18 +2,25 @@ import { useState, useEffect } from 'react';
 import articleImage from './assets/programacao-scaled.jpg';
 import './App.css';
 
+type Article = {
+  id: number;
+  title: string;
+  author_name: string;
+  image?: string;
+  text: string;
+  likes: number;
+};
+
 export function Home() {
-  const [topArticles, setTopArticles] = useState([]);
+  const [topArticles, setTopArticles] = useState<Article[]>([]);
 
   useEffect(() => {
     fetch('http://localhost:3000/articles')
       .then(res => res.json())
       .then(data => {
         const top4 = data
-          .filter((a: any) => a.likes >= 1)
-          .sort((a: any, b: any) => 
-            b.likes - a.likes || new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          )
+          .filter((a: any) => a.likes > 0)
+          .sort((a: any, b: any) => b.likes - a.likes)
           .slice(0, 4);
         setTopArticles(top4);
       });
@@ -49,10 +56,11 @@ export function Home() {
       <div className="top-articles">
         <h2>Artigos Mais Curtidos</h2>
         <div className="articles-list">
-          {topArticles.map((article: any, index: number) => (
+          {topArticles.map((article, index) => (
             <div key={article.id} className="article-card">
               <h3>{String(index + 1).padStart(2, '0')}</h3>
               <h4>{article.title}</h4>
+              <p>Por: {article.author_name}</p>
               {article.image && <img src={article.image} alt={article.title} />}
               <p>{article.text.substring(0, 100)}...</p>
               <p>Likes: {article.likes}</p>

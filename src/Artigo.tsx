@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import './Artigo.css';
+import './Artigos.css';
 
 export function Artigo() {
   const { id } = useParams();
   const [article, setArticle] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
@@ -17,14 +16,7 @@ export function Artigo() {
 
     fetch(`http://localhost:3000/articles/${id}`)
       .then(res => res.json())
-      .then(data => {
-        setArticle(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error('Erro ao carregar artigo:', err);
-        setLoading(false);
-      });
+      .then(data => setArticle(data));
   }, [id]);
 
   const handleLike = () => {
@@ -40,26 +32,28 @@ export function Artigo() {
         'Authorization': `Bearer ${token}`
       }
     })
-      .then(res => res.json())
-      .then(data => {
-        alert(data.message);
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(data => { throw new Error(data.message) });
+        }
+        return res.json();
+      })
+      .then(() => {
         setArticle({ ...article, likes: article.likes + 1 });
-      });
+      })
+      .catch(err => alert(err.message));
   };
 
-  if (loading) return <p>Carregando...</p>;
-  if (!article) return <p>Artigo não encontrado.</p>;
+  if (!article) return <p>Carregando...</p>;
 
   return (
-    <div className="artigo-container">
+    <div className="artigos-container">
       <h1>{article.title}</h1>
       {article.image && <img src={article.image} alt={article.title} />}
       <p>{article.text}</p>
-
       <p><strong>Autor:</strong> {article.author_name}</p>
-      <p><strong>Publicado em:</strong> {new Date(article.created_at).toLocaleDateString()}</p>
+      <p><strong>Criado em:</strong> {new Date(article.created_at).toLocaleDateString()}</p>
       <p><strong>Likes:</strong> {article.likes}</p>
-
       {user && <button onClick={handleLike}>Curtir</button>}
     </div>
   );
