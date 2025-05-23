@@ -46,7 +46,7 @@ export function Home() {
         </ul>
       </aside>
 
-      <section className="top-articles">
+      <div className="top-articles">
         <h2>Artigos Mais Curtidos</h2>
         <div className="articles-list">
           {topArticles.map((article: any, index: number) => (
@@ -59,7 +59,7 @@ export function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </div>
     </main>
   );
 }

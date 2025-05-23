@@ -30,6 +30,11 @@ export function Artigos() {
             <h2>{article.title}</h2>
             {article.image && <img src={article.image} alt={article.title} />}
             <p>{article.text.substring(0, 100)}...</p>
+
+            <p><strong>Autor:</strong> {article.author_name}</p>
+            <p><strong>Publicado em:</strong> {new Date(article.created_at).toLocaleDateString()}</p>
+            <p><strong>Likes:</strong> {article.likes}</p>
+
             <Link to={`/artigo/${article.id}`}>Ler mais</Link>
           </div>
         ))}
