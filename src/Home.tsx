@@ -9,6 +9,7 @@ type Article = {
   image?: string;
   text: string;
   likes: number;
+  created_at: string;
 };
 
 export function Home() {
@@ -60,6 +61,7 @@ export function Home() {
             <div key={article.id} className="article-card">
               <h4>{article.title}</h4>
               <p>Por: {article.author_name}</p>
+              <p>Criado em: {new Date(article.created_at).toLocaleDateString()}</p>
               {article.image && <img src={article.image} alt={article.title} />}
               <p>{article.text.substring(0, 100)}...</p>
               <p>Likes: {article.likes}</p>
@@ -70,5 +72,3 @@ export function Home() {
     </main>
   );
 }
-// O código acima é um componente React que representa a página inicial de um site. Ele exibe um artigo em destaque, uma lista de artigos mais curtidos e uma barra lateral com notícias recentes. O componente utiliza o hook useState para armazenar os artigos mais curtidos e o hook useEffect para buscar os dados da API assim que o componente é montado. A lista de artigos é filtrada, ordenada e limitada a quatro itens antes de ser exibida. O layout é estilizado com classes CSS, e as imagens são carregadas a partir de um arquivo local.
-// O componente também inclui um botão "LER MAIS" que pode ser usado para redirecionar o usuário para a página do artigo em destaque. A barra lateral contém uma lista de notícias recentes, cada uma com um título e uma breve descrição. O código é um exemplo de como estruturar uma página inicial com artigos e notícias, utilizando React para gerenciar o estado e renderizar os dados dinamicamente.
