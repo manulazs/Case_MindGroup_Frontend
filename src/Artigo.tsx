@@ -46,6 +46,7 @@ export function Artigo() {
       {article.image && <img src={article.image} alt={article.title} />}
       <p>{article.text}</p>
       <p>Autor: {article.author_name}</p>
+      <p>Criado em: {new Date(article.created_at).toLocaleDateString()}</p>
       <p>Likes: {article.likes}</p>
       {user && (
         <button onClick={handleLikeToggle}>Curtir/Descurtir</button>

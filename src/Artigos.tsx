@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import './Artigos.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function Artigos() {
   const [articles, setArticles] = useState<any[]>([]);
   const [user, setUser] = useState<any>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:3000/articles')
@@ -36,7 +37,7 @@ export function Artigos() {
   };
 
   const handleEdit = (articleId: number) => {
-    window.location.href = `/editar/${articleId}`;
+    navigate(`/editar/${articleId}`);
   };
 
   return (
@@ -48,6 +49,7 @@ export function Artigos() {
             <h2>{article.title}</h2>
             {article.image && <img src={article.image} alt={article.title} />}
             <p>{article.text.substring(0, 100)}...</p>
+            <p>Criado em: {new Date(article.created_at).toLocaleDateString()}</p>
             <p>Likes: {article.likes}</p>
             {user && (
               <button onClick={() => handleLikeToggle(article)}>Curtir/Descurtir</button>
