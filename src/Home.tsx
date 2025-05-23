@@ -58,7 +58,6 @@ export function Home() {
         <div className="articles-list">
           {topArticles.map((article, index) => (
             <div key={article.id} className="article-card">
-              <h3>{String(index + 1).padStart(2, '0')}</h3>
               <h4>{article.title}</h4>
               <p>Por: {article.author_name}</p>
               {article.image && <img src={article.image} alt={article.title} />}
